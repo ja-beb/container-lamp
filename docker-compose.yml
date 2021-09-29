@@ -1,0 +1,96 @@
+version: "3.7"
+services:
+    proxy:
+        container_name: proxy-instance
+        build: 
+            context: .
+            dockerfile: Containerfile-proxy
+        networks:
+            - network-public
+            - network-private
+        ports:
+            - 80:80
+            - 443:443
+        restart: always
+        depends_on:
+            - site
+            - database
+        links: 
+            - site
+            - database
+
+    cdn:
+        container_name: "cdn-instance"
+        environment:
+            - CONTAINER_SOURCE=cdn
+        build: 
+            context: .
+            dockerfile: Containerfile-cdn
+        volumes:
+            - ./test-site/fonts:/site/www/fonts:ro
+            - ./test-site/media:/site/www/media:ro
+            - ./test-site/script:/site/www/script:ro
+            - ./test-site/style:/site/www/style:ro
+        networks:
+            - network-private            
+        ports:
+            - 80:80
+        restart: always            
+
+    site:
+        container_name: "site-instance"
+        environment:
+            - CONTAINER_SOURCE=site
+        build: 
+            context: .
+            dockerfile: Containerfile-site
+        volumes:
+            - ./test-site/www:/site/www:ro
+        depends_on:
+            - php-fpm
+        links:
+            - php-fpm
+        networks:
+            - network-private
+        ports:
+            - 80:80
+        restart: always
+
+    php-fpm:
+        container_name: "php-instance"
+        build:
+            context: .
+            dockerfile: Containerfile-php
+        volumes:
+            - ./test-site/www:/site/www:ro
+            - ./test-site/include:/site/include:ro
+            - ./test-site/view:/site/view:ro
+            - ./test-site/config:/site/config:ro
+        networks:
+            - network-private
+        restart: always
+
+    database:
+        container_name: "test-database-instance"
+        image: mariadb:latest
+        environment:
+            - MYSQL_ROOT_PASSWORD=root-password
+            - MYSQL_USER=website-user
+            - MYSQL_PASSWORD=website-password
+            - MYSQL_DATABASE=website
+        networks: 
+            - network-private
+            - network-public
+        ports:
+            - 3306:3306
+        restart: always        
+
+networks:
+    network-public:
+        driver: bridge
+        internal: false
+        
+    network-private:
+        driver: bridge
+        internal: true
+

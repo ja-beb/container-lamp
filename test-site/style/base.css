@@ -1,0 +1,44 @@
+#title{
+    line-height: 100px;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+}
+#titleIcon{
+    vertical-align: middle;
+    display: inline-block;
+    float: none;
+}
+#title a,
+#titleLabel{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 24pt;
+    display: inline-block;
+    text-decoration: none; 
+    color: #333;
+}
+#pageMenu{
+    display: block;
+    background: #777 !important;
+}
+#pageMenu ul,
+#pageMenu li{ 
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+#pageMenu > ul > li > a {
+    font-family: 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    color: #fff !important;
+    text-decoration: none;
+    padding: 2ex 2ex;
+    background-color: transparent;
+}
+
+#pageContent{
+    min-width: 700px;
+    width: 50%; 
+    margin: 10ex auto;
+}

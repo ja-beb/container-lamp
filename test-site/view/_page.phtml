@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Test Site</title>
+        <link crossorigin="anonymous" media="all" rel="stylesheet" href="https://cdn.localhost/style/base.css">
+    </head>
+    <body>
+        <header class="pageHeader">
+            <h1 id="title">
+                <a href="https://localhost/index.html" title="">
+                    <img id="titleIcon" src="https://cdn.localhost/media/logo.png" height="75" width="75"/>
+                    <span id="titleLabel">My Test Site</span>
+                </a>
+            </h1>
+            <nav id="pageMenu">
+                <ul>
+                    <li><a href="php-info.html"><span class="">PHP Info</span></a></li>
+                    <li><a href="database.html"><span class="">Database test</span></a></li>
+                    <li><a href="test-get.html?key=one&value=1"><span class="">Test $_GET</span></a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="pageContent"><?php echo $GLOBALS['._view_content'] ?? ''; ?></div>
+    </body>
+</html>

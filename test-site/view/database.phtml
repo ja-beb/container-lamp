@@ -1,0 +1,14 @@
+<?php 
+
+    $_database = database_open('website');
+    $_sql_results = mysqli_query($_database, 'show databases');
+
+    
+?>
+<p>Get list of databases:</p>
+<ul>
+    <?php while ($_sql_data = mysqli_fetch_array($_sql_results, MYSQLI_ASSOC)): ?>
+        <li><?php echo $_sql_data['Database']; ?></li>
+    <?php endwhile; ?>
+    <?php mysqli_free_result($_sql_results); ?>
+</ul>
