@@ -1,0 +1,12 @@
+FROM nginx:alpine
+LABEL Maintainer="sean bourg <sean.bourg@gmail.com>"
+
+RUN apk update; \
+    apk upgrade; \
+    echo $CONTAINER_SOURCE > /c.txt
+
+COPY config.d/cdn /etc/nginx/conf.d
+
+
+EXPOSE 80 443
+CMD ["nginx", "-g", "daemon off;"]
