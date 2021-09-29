@@ -13,12 +13,12 @@ The `bin\generate-certs.sh` script can be used to create the required certificat
 
 4. Build docker containers.
 ```
-[user@host container-static]$ docker-compose build
+[user@host container-lamp]$ docker-compose build
 ```
 
 5. Start docker containers.
 ```
-[user@host container-static]$ docker-compose up -d
+[user@host container-lamp]$ docker-compose up -d
 ```
 
 6. Open a web browser and navigate to the URI `https://cdn.localhost`. Once prompted accept certification.
