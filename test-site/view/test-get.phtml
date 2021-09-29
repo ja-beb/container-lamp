@@ -1,0 +1,6 @@
+<ul>
+    <li>Path = '<?php echo $GLOBALS['._dispatcher_request_path']; ?>'</li>
+    <?php foreach ( $GLOBALS['._dispatcher_request'] as $_key => $_value ): ?>
+        <li><?php echo $_key; ?> = <?php echo $_value; ?></li>
+    <?php endforeach; ?>
+</ul>
