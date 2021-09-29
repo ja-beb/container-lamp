@@ -13,7 +13,7 @@ The `bin\generate-certs.sh` script can be used to create the required certificat
 
 4. Build docker containers.
 ```
-[ser@host container-static]$ docker-compose build
+[user@host container-static]$ docker-compose build
 ```
 
 5. Start docker containers.
