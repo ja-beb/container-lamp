@@ -1,7 +1,7 @@
 FROM nginx:alpine
 LABEL Maintainer="sean bourg <sean.bourg@gmail.com>"
 
-RUN apk update &&& apk upgrade; 
+RUN apk update && apk upgrade; 
 
 COPY config.d/site /etc/nginx/conf.d
 
