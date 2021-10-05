@@ -3,7 +3,8 @@ LABEL Maintainer="sean bourg <sean.bourg@gmail.com>"
 
 RUN apk update && apk upgrade; 
 
-COPY config.d/cdn /etc/nginx/conf.d
+COPY config.d/proxy  /etc/nginx/conf.d/
+COPY ssl /etc/ssl/keys
 
 EXPOSE 80 443
 CMD ["nginx", "-g", "daemon off;"]
