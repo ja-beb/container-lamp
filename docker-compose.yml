@@ -1,7 +1,17 @@
-version: "3.7"
+version: "3.8"
+
+networks:
+    network-public:
+        driver: bridge
+        internal: false
+        
+    network-private:
+        driver: bridge
+        internal: true
+
 services:
     proxy:
-        container_name: proxy-instance
+        container_name: "proxy-instance"
         build: 
             context: .
             dockerfile: Containerfile-proxy
@@ -21,8 +31,6 @@ services:
 
     cdn:
         container_name: "cdn-instance"
-        environment:
-            - CONTAINER_SOURCE=cdn
         build: 
             context: .
             dockerfile: Containerfile-cdn
@@ -39,8 +47,6 @@ services:
 
     site:
         container_name: "site-instance"
-        environment:
-            - CONTAINER_SOURCE=site
         build: 
             context: .
             dockerfile: Containerfile-site
@@ -84,13 +90,3 @@ services:
         ports:
             - 3306:3306
         restart: always        
-
-networks:
-    network-public:
-        driver: bridge
-        internal: false
-        
-    network-private:
-        driver: bridge
-        internal: true
-
