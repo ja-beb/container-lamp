@@ -12,10 +12,10 @@ networks:
 services:
     proxy:
         container_name: "${CONTAINER_NAME_PROXY:-proxy-instance}"
+        image: "${IMAGE_NAME_PROXY:-proxy-image}"
         build:             
             context: .
             dockerfile: Containerfile-proxy
-        image: "${IMAGE_NAME_PROXY:-proxy-image}"
         networks:
             - network-public
             - network-private
@@ -32,12 +32,12 @@ services:
 
     cdn:
         container_name: "${CONTAINER_NAME_CDN:-cdn-instance}"
+        image: "${IMAGE_NAME_CDN:-cdn-image}"
         build:             
             context: .
             dockerfile: Containerfile-nginx
             args:
                 - BUILD_SOURCE=cdn             
-        image: "${IMAGE_NAME_CDN:-cdn-image}"
         volumes:
             - ./test-site/fonts:/site/www/fonts:ro
             - ./test-site/media:/site/www/media:ro
@@ -50,13 +50,13 @@ services:
         restart: always            
 
     site:
-        container_name: "${CONTAINER_NAME_SITE:-site-instance}"
+        container_name: "${CONTAINER_NAME_SITE:-site-instance}"      
+        image: "${IMAGE_NAME_SITE:-site-image}"
         build:             
             context: .
             dockerfile: Containerfile-nginx
             args:
-                - BUILD_SOURCE=site                
-        image: "${IMAGE_NAME_SITE:-site-image}"
+                - BUILD_SOURCE=site          
         volumes:
             - ./test-site/www:/site/www:ro
         depends_on:
@@ -71,10 +71,10 @@ services:
 
     php-fpm:
         container_name: "${CONTAINER_NAME_PHP:-php-instance}"
+        image: "${IMAGE_NAME_PHP:-php-image}"
         build:
             context: .
             dockerfile: Containerfile-php
-        image: "${IMAGE_NAME_PHP:-php-image}"
         volumes:
             - ./test-site/www:/site/www:ro
             - ./test-site/include:/site/include:ro
