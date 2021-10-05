@@ -11,7 +11,7 @@ networks:
 
 services:
     proxy:
-        container_name: "proxy-instance"
+        container_name: "${CONTAINER_NAME_PROXY:-proxy-instance}"
         build: 
             context: .
             dockerfile: Containerfile-proxy
@@ -30,7 +30,7 @@ services:
             - database
 
     cdn:
-        container_name: "cdn-instance"
+        container_name: "${CONTAINER_NAME_CDN:-cdn-instance}"
         build: 
             context: .
             dockerfile: Containerfile-cdn
@@ -46,7 +46,7 @@ services:
         restart: always            
 
     site:
-        container_name: "site-instance"
+        container_name: "${CONTAINER_NAME_SITE:-site-instance}"
         build: 
             context: .
             dockerfile: Containerfile-site
@@ -63,7 +63,7 @@ services:
         restart: always
 
     php-fpm:
-        container_name: "php-instance"
+        container_name: "${CONTAINER_NAME_PHP:-php-instance}"
         build:
             context: .
             dockerfile: Containerfile-php
@@ -77,7 +77,7 @@ services:
         restart: always
 
     database:
-        container_name: "test-database-instance"
+        container_name: "${CONTAINER_NAME_DATABASE:-test-database-instance}"
         image: mariadb:latest
         environment:
             - MYSQL_ROOT_PASSWORD=root-password
