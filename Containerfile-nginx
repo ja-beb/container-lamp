@@ -1,0 +1,11 @@
+FROM nginx:alpine
+LABEL Maintainer="sean bourg <sean.bourg@gmail.com>"
+
+ARG BUILD_SOURCE=nginx
+
+RUN apk update && apk upgrade && echo $BUILD_SOURCE > /c.txt; 
+
+COPY "config.d/${BUILD_SOURCE}" /etc/nginx/conf.d
+
+EXPOSE 80 443
+CMD ["nginx", "-g", "daemon off;"]

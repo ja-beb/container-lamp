@@ -34,7 +34,9 @@ services:
         container_name: "${CONTAINER_NAME_CDN:-cdn-instance}"
         build:             
             context: .
-            dockerfile: Containerfile-cdn
+            dockerfile: Containerfile-nginx
+            args:
+                - BUILD_SOURCE=cdn             
         image: "${IMAGE_NAME_CDN:-cdn-image}"
         volumes:
             - ./test-site/fonts:/site/www/fonts:ro
@@ -51,7 +53,9 @@ services:
         container_name: "${CONTAINER_NAME_SITE:-site-instance}"
         build:             
             context: .
-            dockerfile: Containerfile-site
+            dockerfile: Containerfile-nginx
+            args:
+                - BUILD_SOURCE=site                
         image: "${IMAGE_NAME_SITE:-site-image}"
         volumes:
             - ./test-site/www:/site/www:ro
